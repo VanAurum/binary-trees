@@ -71,17 +71,19 @@ class Node:
             shifted_lines = [u * ' ' + line for line in lines]
             return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
 
-        # Two children.
+        # Two children exist.
         left, n, p, x = self.left._display_aux()
         right, m, q, y = self.right._display_aux()
         s = '%s' % self.data
         u = len(s)
         first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s + y * '_' + (m - y) * ' '
         second_line = x * ' ' + '/' + (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
+
         if p < q:
             left += [n * ' '] * (q - p)
         elif q < p:
             right += [m * ' '] * (p - q)
+            
         zipped_lines = zip(left, right)
         lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
         return lines, n + m + u, max(p, q) + 2, n + u // 2

@@ -1,4 +1,9 @@
+
+#Standard python library imports
 import random
+
+#Local imports
+from binary_trees_class import Node
 
 def size(root): 
     '''
@@ -8,6 +13,7 @@ def size(root):
         return 0 
     else: 
         return (size(root.left) + 1 + size(root.right))
+
 
 def is_balanced(root):
     '''
@@ -25,7 +31,8 @@ def is_balanced(root):
     '''
     if root is None: 
         return True
-    return is_balanced(root.right) and is_balanced(root.left) and abs(get_height(root.left) - get_height(root.right)) <= 1              
+    return is_balanced(root.right) and is_balanced(root.left) and abs(get_height(root.left) - get_height(root.right)) <= 1     
+
 
 def get_height(root):
     '''
@@ -65,26 +72,20 @@ def build_tree(n,min_num,max_num,start=None):
     return root    
 
 
- 
-        
-               
-    
-
-
-def inorderTraversal(root):
+def inorder_traversal(root):
     '''
     Return an array of tree elements using inorder traversal.  
     Left-->Root-->Right
     '''
     res = []
     if root:
-        res = inorderTraversal(root.left)
+        res = inorder_traversal(root.left)
         res.append(root.data)
-        res = res + inorderTraversal(root.right)
+        res = res + inorder_traversal(root.right)
     return res
 
 
-def postorderTraversal(root):
+def postorder_traversal(root):
     '''
     Returns an array of tree elements using post order traversal.  
     Post order is often used to delete tree elements
@@ -92,13 +93,13 @@ def postorderTraversal(root):
     '''
     res=[]
     if root:
-        res=postorderTraversal(root.left)
-        res = res + postorderTraversal(root.right)
+        res=postorder_traversal(root.left)
+        res = res + postorder_traversal(root.right)
         res.append(root.data)
     
     return res  
 
-def preorderTraversal(root):
+def preorder_traversal(root):
     '''
     Returns an array of tree elements using pre order traversal.  
     Pre order is often used to copy a tree
@@ -107,8 +108,8 @@ def preorderTraversal(root):
     res=[]
     if root:
         res.append(root.data)
-        res = res + preorderTraversal(root.left)
-        res = res + preorderTraversal(root.right)
+        res = res + preorder_traversal(root.left)
+        res = res + preorder_traversal(root.right)
          
     return res    
 
@@ -131,70 +132,70 @@ def balance_tree(array):
     new_root.right=balance_tree(array[midpoint+1:])
     return new_root
 
-'''
-# Driver program to test above function 
-root = Node(1) 
-root.left = Node(2) 
-root.right = Node(3) 
-root.left.left = Node(4) 
-root.left.right = Node(5) 
 
-
-print ("Height of tree is %d" %(maxDepth(root)))
-'''
-
-def getLeafCount(node): 
+def get_leaf_count(node): 
     '''
-    Count the number of leaf nodes in a tree
+    Count the number of leaf nodes in a tree.
+
+    Parameters:
+    ___________
+    node : object
+        a binary tree object
     '''
     if node is None: 
         return 0 
     if(node.left is None and node.right is None): 
         return 1 
     else: 
-        return getLeafCount(node.left) + getLeafCount(node.right) 
+        return get_leaf_count(node.left) + get_leaf_count(node.right) 
     
     
-
-def _deepestLeftLeafUtil(root, lvl, maxlvl, isLeft): 
+def _deepest_left_leaf_util(root, level, max_level, is_left): 
     '''
-    # A utility function to find deepest leaf node. 
-    # lvl:  level of current node. 
-    # maxlvl: pointer to the deepest left leaf node found so far 
-    # isLeft: A bool indicate that this node is left child 
-    # of its parent 
-    # resPtr: Pointer to the result 
+    A utility function to find deepest leaf node. 
+
+    Parameters:
+    ___________
+
+    level : int 
+        level of current node. 
+    max_level : object 
+        pointer to the deepest left leaf node found so far. 
+    is_left : bool 
+        indicates that this node is left child of its parent or not.
+    result_pointer : object 
+        Pointer to the result. 
     '''
       
-    # Base CAse 
+    # Base Case 
     if root is None: 
         return
   
     # Update result if this node is left leaf and its  
     # level is more than the max level of the current result 
-    if(isLeft is True): 
+    if(is_left is True): 
         if (root.left == None and root.right == None): 
-            if lvl > maxlvl[0] :  
-                _deepestLeftLeafUtil.resPtr = root  
-                maxlvl[0] = lvl  
+            if level > max_level[0] :  
+                _deepest_left_leaf_util.result_pointer = root  
+                max_level[0] = level  
                 return
   
     # Recur for left and right subtrees 
-    _deepestLeftLeafUtil(root.left, lvl+1, maxlvl, True) 
-    _deepestLeftLeafUtil(root.right, lvl+1, maxlvl, False) 
+    _deepest_left_leaf_util(root.left, level+1, max_level, True) 
+    _deepest_left_leaf_util(root.right, level+1, max_level, False) 
   
-# A wrapper for left and right subtree 
-def deepestLeftLeaf(root): 
+
+def deepest_left_leaf(root): 
     '''
     Used with the above utility function to calculate deepest LEFT leaf
     '''
-    maxlvl = [0] 
-    _deepestLeftLeafUtil.resPtr = None
-    _deepestLeftLeafUtil(root, 0, maxlvl, False) 
-    return _deepestLeftLeafUtil.resPtr     
+    max_level = [0] 
+    _deepest_left_leaf_util.result_pointer = None
+    _deepest_left_leaf_util(root, 0, max_level, False) 
+    return _deepest_left_leaf_util.result_pointer  
 
 
-def printRoute(stack, root): 
+def print_route(stack, root): 
     '''
     Print all routes down a binary tree
     '''
@@ -210,8 +211,8 @@ def printRoute(stack, root):
         print(' '.join([str(i) for i in stack])) 
           
     # otherwise try both subtrees 
-    printRoute(stack, root.left) 
-    printRoute(stack, root.right) 
+    print_route(stack, root.left) 
+    print_route(stack, root.right) 
     stack.pop() 
     
 
@@ -222,6 +223,7 @@ if __name__=='__main__':
 
     tree=build_tree(40,0,100)
     tree.display()
-    print(tree.size(tree))
-    print(tree.is_balanced(tree))
+    print(size(tree))
+    print(is_balanced(tree))
+    print(deepest_left_leaf(tree).data)
             
