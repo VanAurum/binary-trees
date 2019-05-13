@@ -47,6 +47,14 @@ def get_height(root):
     return 1 + max(get_height(root.left), get_height(root.right))    
 
 
+def build_tree_from_array(arr):
+    if arr:
+        root=Node(arr.pop(0))
+        for _ in range(len(arr)):
+            root.insert(arr.pop(0))
+        return root
+
+
 def build_tree(n,min_num,max_num,start=None):
     '''
     Method for building and populating a binary tree.  
@@ -62,20 +70,23 @@ def build_tree(n,min_num,max_num,start=None):
     start : int, optional
         the value to appear at the stump of the tree.            
     '''
+
     if start:
         initial=start
     else:
         initial=random.randint(min_num,max_num)
     root=Node(initial)
+
     for _ in range(n-1):
         root.insert(random.randint(min_num,max_num))
+
     return root    
 
 
 def inorder_traversal(root):
     '''
     Return an array of tree elements using inorder traversal.  
-    Left-->Root-->Right
+    In-order traversal = Left-->Root-->Right
     '''
     res = []
     if root:
@@ -88,8 +99,8 @@ def inorder_traversal(root):
 def postorder_traversal(root):
     '''
     Returns an array of tree elements using post order traversal.  
-    Post order is often used to delete tree elements
-    Left-->Right-->Root
+    Post order is often used to delete tree elements.
+    Post-order traversal = Left-->Right-->Root
     '''
     res=[]
     if root:
@@ -103,7 +114,7 @@ def preorder_traversal(root):
     '''
     Returns an array of tree elements using pre order traversal.  
     Pre order is often used to copy a tree
-    Root-->Left-->Right
+    Pre-order traversal = Root-->Left-->Right
     '''
     res=[]
     if root:
@@ -221,6 +232,11 @@ def print_route(stack, root):
 
 if __name__=='__main__':
 
+    
+
+    
+    tree01=build_tree_from_array(arr)
+    tree01.display()
     tree=build_tree(40,0,100)
     tree.display()
     print(size(tree))
