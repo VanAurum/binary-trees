@@ -1,99 +1,60 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri May 10 08:27:44 2019
-
-@author: vanaurum
-"""
 import random
-import sys
-import time
 
+def size(root): 
+    '''
+    Compute the total number of nodes in a tree.
+    '''
+    if root is None: 
+        return 0 
+    else: 
+        return (size(root.left) + 1 + size(root.right))
 
+def is_balanced(root):
+    '''
+    Method for determining if a binary tree is balanced.
 
-class Node:
-    """This class is a full implementation of a binary tree with methods for executing a wide variety 
-       of binary tree operations.
+    A binary tree is balanced if:
+        - it's empty
+        - the left sub tree is balanced
+        - the right subtree is balanced
+        - the difference in depth between left and right is <=1
 
-       Attributes:
-       ___________
-       data : int, str
-            The value that exists at this node of the tree.  eg. tree=Node(4) initializes a tree with 
-            a stump integer value of 4.
-    """
+    Parameters:
+    ____________
+    root : the node object, below which the definition of 'balanced' will be applied.    
+    '''
+    if root is None: 
+        return True
+    return is_balanced(root.right) and is_balanced(root.left) and abs(get_height(root.left) - get_height(root.right)) <= 1              
 
-    def __init__(self, data):
-        self.data = data
-        self.right = None
-        self.left = None
+def get_height(root):
+    '''
+    Returns the maxium depth of the tree. 
 
-    def insert(self, data):
-        if self.data == data:
-            return
-        elif self.data < data:
-            if self.right is None:
-                self.right = Node(data)
-            else:
-                self.right.insert(data)
-        else: # self.data > data
-            if self.left is None:
-                self.left = Node(data)
-            else:
-                self.left.insert(data)
-
-
-    def display(self):
-        lines, _, _, _ = self._display_aux()
-        for line in lines:
-            print(line)
-
-    def _display_aux(self):
-        """Returns list of strings, width, height, and horizontal coordinate of the root."""
-        # No child exists.
-        if self.right is None and self.left is None:
-            line = '%s' % self.data
-            width = len(line)
-            height = 1
-            middle = width // 2
-            return [line], width, height, middle
-
-        # Only left child exists.
-        if self.right is None:
-            lines, n, p, x = self.left._display_aux()
-            s = '%s' % self.data
-            u = len(s)
-            first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s
-            second_line = x * ' ' + '/' + (n - x - 1 + u) * ' '
-            shifted_lines = [line + u * ' ' for line in lines]
-            return [first_line, second_line] + shifted_lines, n + u, p + 2, n + u // 2
-
-        # Only right child exists.
-        if self.left is None:
-            lines, n, p, x = self.right._display_aux()
-            s = '%s' % self.data
-            u = len(s)
-            first_line = s + x * '_' + (n - x) * ' '
-            second_line = (u + x) * ' ' + '\\' + (n - x - 1) * ' '
-            shifted_lines = [u * ' ' + line for line in lines]
-            return [first_line, second_line] + shifted_lines, n + u, p + 2, u // 2
-
-        # Two children.
-        left, n, p, x = self.left._display_aux()
-        right, m, q, y = self.right._display_aux()
-        s = '%s' % self.data
-        u = len(s)
-        first_line = (x + 1) * ' ' + (n - x - 1) * '_' + s + y * '_' + (m - y) * ' '
-        second_line = x * ' ' + '/' + (n - x - 1 + u + y) * ' ' + '\\' + (m - y - 1) * ' '
-        if p < q:
-            left += [n * ' '] * (q - p)
-        elif q < p:
-            right += [m * ' '] * (p - q)
-        zipped_lines = zip(left, right)
-        lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
-        return lines, n + m + u, max(p, q) + 2, n + u // 2
+    Parameters:
+    ___________
+    root : the node object, below which maximum depth will be calculated.  
+    '''
+    if root is None: 
+        return 0
+    return 1 + max(get_height(root.left), get_height(root.right))    
 
 
 def build_tree(n,min_num,max_num,start=None):
+    '''
+    Method for building and populating a binary tree.  
+
+    Parameters:
+    ___________
+    n : int 
+        the number of integers you want to populate the tree with. 
+    min_num : int 
+        the smallest number available to the random number generator.
+    max_num : int 
+        the largest number available to the random number generator.
+    start : int, optional
+        the value to appear at the stump of the tree.            
+    '''
     if start:
         initial=start
     else:
@@ -104,26 +65,10 @@ def build_tree(n,min_num,max_num,start=None):
     return root    
 
 
-def is_balanced(root):
-    '''
-    A binary tree is balanced if:
-        - it's empty
-        - the left sub tree is balanced
-        - the right subtree is balanced
-        - the difference in depth between left and right is <=1
-    '''
-    if root is None: 
-        return True
-    return is_balanced(root.right) and is_balanced(root.left) and abs(get_height(root.left) - get_height(root.right)) <= 1   
+ 
         
                
-def get_height(root):
-    '''
-    Return the maxium depth of the tree
-    '''
-    if root is None: 
-        return 0
-    return 1 + max(get_height(root.left), get_height(root.right))        
+    
 
 
 def inorderTraversal(root):
@@ -249,7 +194,6 @@ def deepestLeftLeaf(root):
     return _deepestLeftLeafUtil.resPtr     
 
 
-
 def printRoute(stack, root): 
     '''
     Print all routes down a binary tree
@@ -270,13 +214,14 @@ def printRoute(stack, root):
     printRoute(stack, root.right) 
     stack.pop() 
     
-    
 
-def size(node): 
-    '''
-    Compute the total number of nodes in a tree
-    '''
-    if node is None: 
-        return 0 
-    else: 
-        return (size(node.left)+ 1 + size(node.right))     
+
+
+
+if __name__=='__main__':
+
+    tree=build_tree(40,0,100)
+    tree.display()
+    print(tree.size(tree))
+    print(tree.is_balanced(tree))
+            
