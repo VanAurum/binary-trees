@@ -35,6 +35,8 @@ ___
              39    52  58_                   
                           \                  
                          67                  
+
+
 Tree size: 24
 Tree balanced? False
 Deepest left leaf: 39
