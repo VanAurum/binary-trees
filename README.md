@@ -15,13 +15,15 @@ This is a master class with pretty-print output that I created for people who ar
 * __print_route__
 * __get_deepest_left_leaf__
 
+___
 
 
-#### build_tree
+
+### build_tree
 Builds a binary tree of size __n__ by drawing random numbers 
 between __min_nim__ and __max_num__.  You can also specify an optiona __start__ value to be the stump node.
 
-#### Output:
+### Output:
 ```
       ________________45_____________________              
      /                                       \             
