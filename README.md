@@ -18,11 +18,6 @@ This is a master class with pretty-print output that I created for people who ar
 ___
 
 
-
-### build_tree
-Builds a binary tree of size __n__ by drawing random numbers 
-between __min_nim__ and __max_num__.  You can also specify an optiona __start__ value to be the stump node.
-
 ### Output:
 ```
    ________________________68___________     
