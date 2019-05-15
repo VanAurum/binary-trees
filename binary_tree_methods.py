@@ -237,9 +237,19 @@ if __name__=='__main__':
     
     #tree01=build_tree_from_array(arr)
     #tree01.display()
-    tree=build_tree(40,0,100)
+    tree=build_tree(25,0,100)
     tree.display()
-    print(size(tree))
-    print(is_balanced(tree))
-    print(deepest_left_leaf(tree).data)
+    #balanced=balance_tree(tree)
+    #balanced.display()
+    print('Tree size: '+ str(size(tree)))
+    print('Tree balanced? ' +str(is_balanced(tree)))
+    print('Deepest left leaf: ' +str(deepest_left_leaf(tree).data))
+    print('Tree height :' + str(get_height(tree)))
+    print('In-order traversal: ', inorder_traversal(tree))
+    print('Post-order traversal :', postorder_traversal(tree))
+    print('Number of leafs: ' +str(get_leaf_count(tree)))
+    print('Deepest left leaf: '+str(deepest_left_leaf(tree).data))
+    
+    
+
             
