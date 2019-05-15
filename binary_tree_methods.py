@@ -235,8 +235,8 @@ if __name__=='__main__':
     
 
     
-    tree01=build_tree_from_array(arr)
-    tree01.display()
+    #tree01=build_tree_from_array(arr)
+    #tree01.display()
     tree=build_tree(40,0,100)
     tree.display()
     print(size(tree))
