@@ -2,12 +2,28 @@
 This is a master class with pretty-print output that I created for people who are interested in learning about binary trees and how all the different functionality can behave!
 
 ## Method list
-* __build_tree__ : Builds a binary tree of size __n__ by drawing random numbers 
+* __build_tree__ 
+* __size__
+* __is_balanced__
+* __get_height__
+* __build_tree_from_array__
+* __inorder_traversal__
+* __postorder_traversal__
+* __preorder_traversal__
+* __balance_tree__
+* __get_leaf_count__
+* __print_route__
+* __get_deepest_left_leaf__
+
+
+
+#### build_tree
+Builds a binary tree of size __n__ by drawing random numbers 
 between __min_nim__ and __max_num__.  You can also specify an optiona __start__ value to be the stump node.
 
-## Output:
+#### Output:
 ```
-   ________________45_____________________              
+      ________________45_____________________              
      /                                       \             
    _10___________                       ____77_______      
   /              \                     /             \     
@@ -24,4 +40,5 @@ between __min_nim__ and __max_num__.  You can also specify an optiona __start__ 
                           49                               
 
 ```
+
 
